@@ -21,26 +21,28 @@
             </label><br>
             <label>Category
                 <br><select multiple class="form-control" id="categories" name="categories[]">
-                @foreach($item as $key)
-                    <option style="width: 623px" value="{{$key->id}}">{{$key->title}}</option>
-                @endforeach
-            </select></label> <br>
+                    @foreach($category as $key)
+                        <option style="width: 623px" value="{{$key->id}}">{{$key->title}}</option>
+                    @endforeach
+                </select></label> <br>
 
 
             <label>Auther
-            <select class="form-control" name="authers">
-                @foreach($data as $key)
-                    <option value="{{$key->id}}">{{$key->name}}</option>
-                @endforeach
-            </select>
+                <select class="form-control" name="authers">
+                    @foreach($auther as $key)
+                        <option value="{{$key->id}}">{{$key->name}}</option>
+                    @endforeach
+                </select>
             </label> <br>
             <button class="btn btn-success" type="submit">Insert</button>
         </form>
     </div>
+
 @endsection
 
 @section('footer-my-script')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
 
     <script>
 

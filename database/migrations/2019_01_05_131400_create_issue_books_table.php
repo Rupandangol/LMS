@@ -20,9 +20,11 @@ class CreateIssueBooksTable extends Migration
             $table->timestamps();
             $table->integer('book_id')->unsigned()->nullable();
             $table->integer('student_id')->unsigned()->nullable();
+            $table->integer('isbn_code')->unsigned()->nullable();
 
-            $table->foreign('book_id')->references('id')->on('books')->onUpdate('cascade');
-            $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade');
+            $table->foreign('book_id')->references('id')->on('books')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('isbn_code')->references('id')->on('book_i_s_b_ns')->onUpdate('cascade')->onDelete('cascade');
 
         });
     }

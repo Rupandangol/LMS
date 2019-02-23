@@ -31,7 +31,11 @@
                 </li>
                 <li>
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    <span class="glyphicon-class">Returned Books</span>
+                    <span class="glyphicon-class">Returned Books:{{count($history)}}</span>
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span class="glyphicon-class">Books not returned:{{count($itemIssue)}}</span>
                 </li>
 
 

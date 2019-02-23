@@ -1,11 +1,13 @@
 @extends('backend.master')
 @section('title')
     Dashboard
-    @endsection
+@endsection
 @section('content')
     <div class="x_panel">
         <div class="x_title">
-            <h2>Daily active users <small>Sessions</small></h2>
+            <h2>Daily active users
+                <small>User</small>
+            </h2>
             <ul class="nav navbar-right panel_toolbox">
 
             </ul>
@@ -22,7 +24,6 @@
 
         </div>
     </div>
-
 
 
 
@@ -70,4 +71,39 @@
 
 
 
+
+
 @endsection
+@section('footer-my-script')
+    <script>
+        {{--// function fineFunction() {--}}
+        {{--//--}}
+        {{--//     var isbnNo = document.getElementById('isbn_id').value;--}}
+        {{--//     debugger;--}}
+        {{--//     alert(isbnNo);--}}
+        {{--// }--}}
+
+        $("#idForm").submit(function (e) {
+
+            var form = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: 'onlinelibrarymanagement.com/@admin@/dashReturn',
+                data: form.serialize(), // serializes the form's elements.
+                success: function (data) {
+                    alert(data); // show response from the php script.
+                },
+                error: function (e) {
+                    alert('try again');
+
+                }
+            });
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
+    </script>
+@endsection
+
+
+

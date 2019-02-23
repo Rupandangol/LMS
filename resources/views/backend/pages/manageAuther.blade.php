@@ -3,7 +3,7 @@
     Manage Author
 @endsection
 @section('content')
-
+@include('backend.messages.message')
     <table class="table table-bordered">
         <tr>
             <th>id</th>
@@ -32,8 +32,8 @@
 
                 </td>
 
-                <td><a href="" class="btn btn-primary">Edit</a></td>
-                <td><a href="" class="btn btn-danger">delete</a></td>
+                <td><a href="{{url('/@admin@/manageAuther/aEdit/'.$key->id)}}" class="btn btn-primary">Edit</a></td>
+                <td><a href="{{url('/@admin@/manageAuther/aDelete/'.$key->id)}}" class="btn btn-danger">delete</a></td>
             </tr>
         @endforeach
 

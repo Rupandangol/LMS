@@ -8,7 +8,6 @@
     @include('backend.messages.errors')
     @include('backend.messages.message')
 
-
     <div class="x_panel">
         <div class="x_title">
             <h2>Form Admin <i class="fa fa-home"></i>

@@ -8,7 +8,7 @@ class IssueBook extends Model
 {
     protected $table = 'issue_books';
     protected $fillable = [
-        'date', 'status', 'book_id', 'student_id'
+        'date', 'status', 'book_id', 'student_id', 'isbn_code'
     ];
 
     public function getBook()
@@ -19,11 +19,21 @@ class IssueBook extends Model
             'book_id');
     }
 
-    public function getStudent(){
+    public function getStudent()
+    {
         return $this->hasOne(
             'App\model\student',
             'id',
             'student_id'
+        );
+    }
+
+    public function getIsbnNo()
+    {
+        return $this->hasOne(
+            'App\model\BookISBN',
+            'isbn_code',
+            'id'
         );
     }
 

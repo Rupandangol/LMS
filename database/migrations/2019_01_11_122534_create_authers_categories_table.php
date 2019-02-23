@@ -19,8 +19,8 @@ class CreateAuthersCategoriesTable extends Migration
             $table->integer('categories_id')->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('authers_id')->references('id')->on('authers')->onUpdate('cascade');
-            $table->foreign('categories_id')->references('id')->on('categories')->onUpdate('cascade');
+            $table->foreign('authers_id')->references('id')->on('authers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('categories_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

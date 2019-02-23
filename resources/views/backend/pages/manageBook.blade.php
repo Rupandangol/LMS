@@ -36,10 +36,10 @@
                 </td>
                 <td><code>{{$key->no_of_books}}</code></td>
                 <td>
-                    <button class="btn btn-primary">Edit</button>
+                    <a class="btn btn-primary" href="{{url('/@admin@/manageBook/bEdit/'.$key->id)}}"><i class="fa fa-pencil"></i></a>
                 </td>
                 <td>
-                    <button class="btn btn-danger">Delete</button>
+                    <a class="btn btn-danger" href="{{url('/@admin@/manageBook/bDelete/'.$key->id)}}"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         @endforeach

@@ -1,4 +1,3 @@
-
 <!-- jQuery -->
 <script src="{{URL::to('lib/jquery/dist/jquery.js')}}"></script>
 <!-- Bootstrap -->

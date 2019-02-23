@@ -17,6 +17,7 @@ class CreateBooksTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('detail');
+            $table->integer('isbn')->nullable();
             $table->integer('no_of_books')->nullable();
             $table->timestamps();
 

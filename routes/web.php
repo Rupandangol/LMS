@@ -15,6 +15,8 @@
 //    return view('admin.admin');
 //});
 //
+use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -30,19 +32,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 //    login student
 Route::get('/', 'loginController@index')->name('login-student');
 Route::post('/', 'loginController@loginStudent');
-Route::any('/logoutStudent','loginController@logoutStudent')->name('logout-student');
+Route::any('/logoutStudent', 'loginController@logoutStudent')->name('logout-student');
 
 
 //login admin
 
-Route::get('/@dmin','loginController@adminIndex')->name('login-admin');
-Route::post('/@dmin','loginController@adminPage');
-Route::any('/@dminLogout','loginController@adminLogout')->name('admin-logout');
+Route::get('/@dmin', 'loginController@adminIndex')->name('login-admin');
+Route::post('/@dmin', 'loginController@adminPage');
+Route::any('/@dminLogout', 'loginController@adminLogout')->name('admin-logout');
 
 //backend
 
-
-Route::group(['prefix' => '@admin@', 'namespace' => 'Backend','middleware'=>'auth:admin'], function () {
+Route::group(['prefix' => '@admin@', 'namespace' => 'Backend', 'middleware' => 'auth:admin'], function () {
 
 
 //    login
@@ -51,37 +52,44 @@ Route::group(['prefix' => '@admin@', 'namespace' => 'Backend','middleware'=>'aut
     Route::get('/manageAdmin', 'BackendLoginController@manageAdmin');
 
 
+    //setting
+    Route::get('/setting', 'BackendController@setting');
+    //setting action
+    Route::post('/setting/settingAction', 'BackendController@settingAction');
+
+
 //    admin manage
-    Route::post('/manageAdmin/delete','BackendLoginController@deleteAdmin')->name('delete-admin');
-    Route::post('/manageAdmin/delete/update','BackendLoginController@updateAdmin')->name('update-admin');
+    Route::post('/manageAdmin/delete', 'BackendLoginController@deleteAdmin')->name('delete-admin');
+    Route::post('/manageAdmin/delete/update', 'BackendLoginController@updateAdmin')->name('update-admin');
 
 //    loginStudent
-    Route::get('/addStudent','BackendLoginController@addStudent');
-    Route::post('/addStudentAction','BackendLoginController@addStudentAction')->name('student-action');
-    Route::get('/manageStudent','BackendLoginController@manageStudent');
+    Route::get('/addStudent', 'BackendLoginController@addStudent');
+    Route::post('/addStudentAction', 'BackendLoginController@addStudentAction')->name('student-action');
+    Route::get('/manageStudent', 'BackendLoginController@manageStudent');
 
-    Route::post('/manageStudent/viewStudent','BackendLoginController@viewStudent')->name('view-student');
+    Route::post('/manageStudent/viewStudent', 'BackendLoginController@viewStudent')->name('view-student');
 
 //        admin status
-    Route::post('/statusAdmin','BackendLoginController@statusAdmin')->name('admin-status');
+    Route::post('/statusAdmin', 'BackendLoginController@statusAdmin')->name('admin-status');
 //    student status
 
-    Route::post('/manageStudent/viewStudent/statusStudent','BackendLoginController@statusStudent')->name('student-status');
+    Route::post('/manageStudent/viewStudent/statusStudent', 'BackendLoginController@statusStudent')->name('student-status');
 
 //    student manage
-    Route::post('/manageStudent/delete','BackendLoginController@deleteStudent')->name('delete-student');
+    Route::post('/manageStudent/delete', 'BackendLoginController@deleteStudent')->name('delete-student');
 
+//    dashboard Issue
+    Route::post('/issueBook/dashIssue', 'BackendController@dashIssue')->name('dash-issue');
 
-
+//    dashboard return
+    Route::post('/dashReturn', 'BackendController@dashReturn')->name('dash-return');
 
 //   History Issue Book
 
-    Route::post('/history','BackendController@history')->name('history');
+    Route::post('/history', 'BackendController@history')->name('history');
 
-    Route::get('/historyList','BackendController@historyList');
-
-
-
+    Route::get('/historyList', 'BackendController@historyList')->name('history-list');
+    Route::post('/historyList/search', 'BackendController@historySearch');
 
 
 //dashboard
@@ -103,7 +111,7 @@ Route::group(['prefix' => '@admin@', 'namespace' => 'Backend','middleware'=>'aut
         Route::get('/', 'BackendController@issueBook');
         Route::post('/check', 'BackendController@issueBookCheck');
         Route::get('/manageIssueBook', 'BackendController@manageIssue');
-        Route::get('/manageIssueBook/check','BackendController@checkStudent');
+        Route::get('/manageIssueBook/check', 'BackendController@checkStudent');
 
     });
 
@@ -112,19 +120,24 @@ Route::group(['prefix' => '@admin@', 'namespace' => 'Backend','middleware'=>'aut
 
 //    author manage
     Route::get('/manageAuther', 'BackendController@manageAuther');
+    Route::get('/manageAuther/aDelete/{id}', 'BackendController@deleteAuther');
+    Route::get('/manageAuther/aEdit/{id}', 'BackendController@editAuther');
+    Route::post('/manageAuther/aEdit/editAction', 'BackendController@editAutherAction')->name('edit-auther');
 
 
 //    category manage
     Route::get('/manageCategory', 'BackendController@manageCategory');
+    Route::get('/manageCategory/cEdit/{id}', 'BackendController@cEdit');
+    Route::post('/manageCategory/cEdit/editAction', 'BackendController@editAction')->name('edit-action');
 
 //    book manage
     Route::get('/manageBook', 'BackendController@manageBook');
+    Route::get('/manageBook/bDelete/{id}', 'BackendController@deleteBook');
 
 
 ////    delete
     Route::group(['prefix' => 'manageCategory'], function () {
         Route::get('/cDelete/{id}', 'BackendController@deleteCategory')->name('deleteCategory')->name('category-delete');
-        Route::get('/aDelete/{id}', 'BackendController@deleteAuther')->name('deleteAuther');
 
 
 //    status
@@ -132,32 +145,36 @@ Route::group(['prefix' => '@admin@', 'namespace' => 'Backend','middleware'=>'aut
         Route::post('/statusAuther', 'BackendController@autherStatus');
     });
 });
-
+//   ajax controller
+Route::get('api/check-student', 'ajaxController@checkStudent');
+Route::get('api/check-book', 'ajaxController@checkBook');
+Route::get('api/fine','ajaxController@fine');
+Route::get('api/status','ajaxController@status');
 
 
 //   Frontend
 
-Route::group(['namespace' => 'Frontend','middleware'=>'auth:student'], function () {
+Route::group(['namespace' => 'Frontend', 'middleware' => 'auth:student'], function () {
 
     Route::get('/studentLogin', 'frontendController@index')->name('student-dashboard');
 
 
 //    overView
 
-    Route::get('/overview','frontendController@overview');
+    Route::get('/overview', 'frontendController@overview');
 
 //    authorList
 
-    Route::get('/authorList','frontendController@authorList');
+    Route::get('/authorList', 'frontendController@authorList');
 
 //    bookList
 
-    Route::get('/bookList','frontendController@bookList');
+    Route::get('/bookList', 'frontendController@bookList');
 
 
 //    categoryList
 
-    Route::get('/categoryList','frontendController@categoryList');
-    Route::post('/categoryList/categoryBooks','frontendController@categoryBooks')->name('categoryBooks');
+    Route::get('/categoryList', 'frontendController@categoryList');
+    Route::post('/categoryList/categoryBooks', 'frontendController@categoryBooks')->name('categoryBooks');
 
 });

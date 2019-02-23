@@ -21,7 +21,8 @@ class Book extends Model
         );
     }
 
-    public function authers(){
+    public function authers()
+    {
         return $this->belongsToMany(
             'App\model\auther',
             'books_authers',
@@ -30,7 +31,8 @@ class Book extends Model
         );
     }
 
-    public function students(){
+    public function students()
+    {
         return $this->belongsToMany(
             'App\model\student',
             'books_students',
